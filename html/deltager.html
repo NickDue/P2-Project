@@ -5,7 +5,6 @@
     <title>Page Title</title>
     <meta name="description">
     <link rel="stylesheet" type="text/css" href="mystyle.css">
-    <script src=""></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -21,10 +20,10 @@
         function myFunction() {
             let koordX = prompt("Indtast din X kordinat");
             let koordY = prompt("Indtast din Y kordinat");
-        if (koordX != null) {
-            document.getElementById("demo").innerHTML =
-            "Dine koordinater er:" + koordX + "X," + koordY +  "Y. Hjælp er på vej!";
-            document.getElementById("info").style.display = "block";
+            if (koordX != null) {
+                document.getElementById("demo").innerHTML =
+                "Dine koordinater er:" + koordX + "X," + koordY +  "Y. Hjælp er på vej!";
+                document.getElementById("info").style.display = "block";
         }
         }
     </script>
