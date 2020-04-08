@@ -11,8 +11,7 @@ http.createServer(function (req,res) {
             res.writeHead(200, {'Content-type':'text/html'});
             fs.readFile('html/login.html', function (err, html){
                 if (err) throw err;
-                res.write(html);
-                res.end();
+                res.end(html);
             })
             break;
         case '/css/login.css':
@@ -25,15 +24,27 @@ http.createServer(function (req,res) {
             res.writeHead(200, {'Content-type':'text/html'});
             fs.readFile('html/deltager.html', function (err, html){
                 if (err) throw err;
-                res.write(html);
-                res.end();
+                res.end(html);
             })
             break;
         case "/javascript/deltager.js":
-            let FileStream = fs.createReadStream(__dirname + '/javascript/deltager.js', 'UTF-8');
             res.writeHead(200, {'Content-type':'text/javascript'});
-            FileStream.pipe(res);
+            fs.createReadStream(__dirname + '/javascript/deltager.js', 'UTF-8').pipe(res);
             break;
+        case '/css/style.css':
+            res.writeHead(200, {'Content-type':'text/css'});
+            fs.createReadStream(__dirname + '/css/style.css', 'UTF-8').pipe(res);
+            break;
+    }
+    if (req.method === 'POST'){ //en if statement der forventer POST methods
+        switch (req.url){ // switch med forskellige cases 
+            case "/koords":
+                res.writeHead(200, {"Content-type":"text/plain"}); // Serveren siger ok, og tak for data, til clienten
+                req.on('data', function(chunk){ // req.on = der sker noget, "data"(event) = hvad sker der, function(chunk) = hvad gør jeg så
+                    let info = JSON.parse(chunk); // laver JSONstring om til noget vi kan læse og gemmer i info
+                    console.log(info);
+                })
+        }
     }
 }).listen(port, hostname, function () {
     console.log(`Now running on ${hostname}:${port}`);

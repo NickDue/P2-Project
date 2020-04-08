@@ -37,11 +37,12 @@ function distanceBetweenPoints(x1, y1, x2, y2){ //Udregner afstanden mellem to p
     
     return dist;
 }
-
+ // while samarit is not near rapportør
 let rotation = 0;
 function rotate() {
     let picture = document.getElementById("picture");
-    let angleForVector = calculateVector(1,1,2,2)
+    let angleForVector = calculateVector(1,2,3,4);
     picture.style.transform = `rotate(${angleForVector.angle}deg)`
+    //console.log(calculateVector(1,2,3,4))
 }
 
