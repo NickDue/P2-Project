@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang = "da">
+<html lang="en">
 <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel = "stylesheet" href = "../css/login.css">
-
 </head>
 <body>
     <nav class = "navbar">
@@ -53,27 +52,20 @@
                 Login
             </h1>
             <p class="guidelines">
-                <strong>
-                    Vælg din status for dette event <br>
-                    Hvis du er samarit, vil du have tildelt et login af din administrator. <br>
-                    Tryk blot på den ønskede type du vil ind på. <br>
-                </strong>    
+                Indtast dit username og password i boksene nedenunder. <br>
+                Dit username og password vil være tildelt af din administrator. <br>
+                Ved problemer, kontakt venligst din administrator. <br>
             </p>
-            <p class="buttons">
-                <button class="button">
-                    <a href="#" class="button-text">
-                        Administrator
-                    </a>
-                </button>
-                <br> <br> <br>
-                <button class="button">
-                    <a href="support.html" class="button-text">
-                        Samarit
-                    </a>
-                </button>
-            </p>
+            <form action="/html/test.html/"
+                <label for="password">Username</label><br>
+                <input type="text" name="usrn" placeholder="Enter Username" required><br>
+                <label for="password">Password</label><br>
+                <input type="text" name="psw" placeholder="Enter Password" required><br>
+                <input type="submit" value="Submit" onclick="sendLogin(usrn.value, psw.value)">
+            </form>
         </div>
-    </main>
+    </main> 
+    <script src="../javascript/login.js"></script>
     
 </body>
 </html>

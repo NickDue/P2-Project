@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang = "da">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel = "stylesheet" href = "../css/start.css">
+
+</head>
+<body>
+    <%- include('partials/nav.ejs') -%>
+    <main>
+        <div>
+            <h1 class="headline">
+                Login
+            </h1>
+            <p class="guidelines">
+                <strong>
+                    Vælg din status for dette event <br>
+                    Hvis du er samarit, vil du have tildelt et login af din administrator. <br>
+                    Tryk blot på den ønskede type du vil ind på. <br>
+                </strong>    
+            </p>
+            <p class="buttons">
+                <button class="button">
+                    <a href="login.html" class="button-text">
+                        Administrator
+                    </a>
+                </button>
+                <br> <br> <br>
+                <button class="button">
+                    <a href="login.html" class="button-text">
+                        Samarit
+                    </a>
+                </button>
+            </p>
+        </div>
+    </main>
+    
+</body>
+</html>

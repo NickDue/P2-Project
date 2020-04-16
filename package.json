@@ -1,0 +1,26 @@
+{
+  "name": "p2-project",
+  "version": "1.0.0",
+  "description": "P2 projektet",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickDue/P2-Project.git"
+  },
+  "author": "B2-21",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickDue/P2-Project/issues"
+  },
+  "homepage": "https://github.com/NickDue/P2-Project#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mysql": "^2.18.1"
+  }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang = "da">
+  <head>
+    <meta charset = "utf-8">
+    <title>Deltager</title>
+    <meta name = "description">
+    <link rel = "stylesheet" href = "../css/style.css">
+  </head>
+  <body>
+    <h1>Deltager</h1>
+    <%- include('partials/nav.ejs') -%>
+    <script src = "../javascript/deltager.js"></script>
+    <!--<script src = "../javascript/movement.js"></script> !-->     
+    <button onclick = "getHelp();">
+        Hjælp mig
+    </button>
+    <p id = "demo"></p>
+    <p id = "info" style = "display: none;">Hvis du har yderligere information, indtast her: <input type = "text" id = "addInfo"> </p>
+
+    </body>
+</html>
