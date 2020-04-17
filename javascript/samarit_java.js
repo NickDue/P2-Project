@@ -48,3 +48,29 @@ function distanceBetweenPoints(destinationX, destinationY, originX, originY){ //
     
     return dist;
 }
+
+const tabelAPI = "http://127.0.0.1:3160/updateTabel"; 
+async function getCases() {
+    let table = document.getElementById("samarittable");
+    cleanTable();
+    let element = await fetch(tabelAPI);
+    let para = await element.json();
+    for (let i = 0; i < para.length; i++) {
+        updateTabel(para,i);
+    }
+}
+function cleanTable(){
+    let table = document.getElementById("samarittable");
+        while (table.row != null) {
+            table.deleteRow(0);
+        }
+    }
+function updateTabel(para,i){
+    let row = table.insertRow(); // adding new tr
+        let cell1 = row.insertCell(); //adding new td
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        cell1.innerHTML = para[i].number;
+        cell2.innerHTML = para[i].coordX;
+        cell3.innerHTML = para[i].coordY;
+}

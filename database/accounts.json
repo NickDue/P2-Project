@@ -1,0 +1,17 @@
+[
+  {
+    "name": "admin",
+    "password": "$2b$10$Op/3BjbsfMRv.bPGlUFpP.MKX3YbVBPPfyr7c4OeU87N4DNtJIzxe",
+    "id": "1587120157289"
+  },
+  {
+    "name": "admin",
+    "password": "$2b$10$hD7IfGvjj4S/Xp2Xb8343eU9V4mHsXF33IVoICKHtvq/OBrwsYB5.",
+    "id": "1587120184961"
+  },
+  {
+    "name": "1",
+    "password": "$2b$10$.88OR3Hjtcg7iTnXJ3AkSe3aAjY8kf9azuIZWzBG7qYZN5VfCXSQy",
+    "id": "1587120249639"
+  }
+]

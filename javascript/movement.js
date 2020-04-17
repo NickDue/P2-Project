@@ -24,7 +24,7 @@ function movement(destinationX,destinationY,originX,originY){
             }
         else {     
             position[0] += enhedsvektorX*Math.random()*51;
-            position[1] += enhedsvektorY*Math.random()*51;
+            position[1  ] += enhedsvektorY*Math.random()*51;
             dist = distanceBetweenPoints(position[0],position[1],destinationX,destinationY);
             enhedsvektorX = (1/(dist))*(destinationX-position[0]);
             enhedsvektorY = (1/(dist))*(destinationY-position[1]);

@@ -18,10 +18,15 @@
                 Dit username og password vil være tildelt af din administrator. <br>
                 Ved problemer, kontakt venligst din administrator. <br>
             </p>
+            <% if(messages.error) { %> 
+                <%= messages.error %> 
+            <% } %> 
             <div class="login-form">
-                <form action="auth" method="POST">
-                    <input type="text" name="usrn" placeholder="Enter Username" required><br>
-                    <input type="text" name="psw" placeholder="Enter Password" required><br>
+                <form action="login" method="POST">
+                    <label for="username"></label>
+                    <input type="text" name="username" placeholder="Enter Username" required><br>
+                    <label for="password"></label>
+                    <input type="text" name="password" placeholder="Enter Password" required><br>
                     <input type="submit" value="LOG IN!">
                 </form>
             </div>
