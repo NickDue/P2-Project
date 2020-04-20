@@ -65,12 +65,24 @@ function cleanTable(){
             table.deleteRow(0);
         }
     }
-function updateTabel(para,i){
+function updateTabel(para,i,table){
     let row = table.insertRow(); // adding new tr
         let cell1 = row.insertCell(); //adding new td
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
+        let cell4 = row.insertCell();
+        let cell5 = row.insertCell();
         cell1.innerHTML = para[i].number;
         cell2.innerHTML = para[i].coordX;
         cell3.innerHTML = para[i].coordY;
+        cell4.innerHTML = para[i].exInfo; //Lige nu giver den "Ingen info" i app.js. Skal rettes
+        cell5.innerHTML = '<button type = "button" onClick = "acceptButt()" > Accept </button>'
+                         + '<button type = "button" onClick = "rejectButt()" > Reject </button>';                          
 }
+
+function acceptButt () {
+    console.log("You have accepted");
+}
+function rejectButt () {
+    console.log("You have rejected");
+} 

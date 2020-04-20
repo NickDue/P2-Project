@@ -1,34 +1,39 @@
+if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
 const express = require('express');
 const fs = require('fs');
 const port = 3160;
 const hostname = '127.0.0.1';
 const bcrypt = require('bcrypt');
 const passport = require('passport')
-const flash = require('express-flash');
-const session = require('express-session');
-
 const initializePassport = require('./passport-config');
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOveride = require('method-override')
+
 initializePassport(
     passport, 
-    username => {
-        return accounts.find(user => user.name === username); 
-});
-const accounts = []
+    name => users.find(user => user.name === name),
+    id =>  users.find(user => user.id === id),
+);
 let app = express();
 app.set('view engine','ejs');
-app.use(express.urlencoded({ extended: false}));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
 });
+app.use(express.urlencoded({ extended: false}));
 app.use(flash())
 app.use(session({
-    secret: "b2-21",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(methodOveride('_method'))
 
 app.get('/' || '/start', (req, res) => {
     res.render('start')
@@ -36,14 +41,14 @@ app.get('/' || '/start', (req, res) => {
 app.get('/deltager', (req,res) =>{
     res.render('deltager')
 })
-app.get('/login', (req,res) =>{
-    res.render('login');
-})
-app.get('/register', (req,res) =>{
+app.get('/register',checkNotAuthenticated, (req,res)=>{
     res.render('register');
-})
-app.get('/admin', (req,res) =>{
-    res.render('admin');
+});
+app.get('/login',checkNotAuthenticated, (req,res)=>{
+    res.render('login');
+});
+app.get('/admin', checkAuthenticated, (req,res) =>{
+    res.render('admin', { name: req.user.name });
 })
 app.get('/samarit', (req,res) =>{
     res.sendFile(__dirname + '/html/samarit.html');
@@ -70,37 +75,31 @@ app.get('/css/start.css', (req, res) => {
     res.sendFile(__dirname + '/css/start.css');
 })
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/admin',
     failureRedirect: '/login',
     failureFlash: true
 }))
 
-app.post('/register', async (req,res) => {
+app.post('/register',checkNotAuthenticated, async (req,res)=>{
     try {
-        const hashedPassword = await bcrypt.hash(req.body.pass, 10);
-        accounts.push({
-            name: req.body.user,
-            password: hashedPassword,
-            id: Date.now().toString()
+        console.log(req.body);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        users.push({
+            id: Date.now().toString(),
+            name: req.body.name,
+            password: hashedPassword
         })
-        console.log(accounts);
-        /*fs.readFile(__dirname + '/database/accounts.json', (err, val) => {
-            if (err) throw err;
-            let users = JSON.parse(val);
-            users.push({
-                name: req.body.user,
-                password: hashedPassword,
-                id: Date.now().toString()
-            })
-            fs.writeFile(__dirname + '/database/accounts.json', JSON.stringify(users, null, 2), (error) => {
-                if (error) throw error;
-            })
-        })*/
         res.redirect('/login');
     } catch {
-        res.redirect('/register');
+        res.redirect('/register')
     }
+    console.log(users);
+})
+
+app.delete('/logout', (req, res) => {
+    req.logOut()
+    res.redirect('/login')
 })
 
 app.get('/updateTabel', (req, res) =>{
@@ -128,21 +127,30 @@ app.listen(port, ()=>{
 
 let objectCases = [];
 let users = [];
-let x = 1;
+let x = 0;
 
 function personCase(info, x) { //Vores constructer funktion der laver cases
     let coord = info.toString().split(','); // laver info object om til en string og splitter derefter elementer fordelt med "," og gemmes i et array.
     this.number = x; //nummeret på casen
     this.coordX = coord[0]; //X koordinat
     this.coordY = coord[1]; //Y koordinat
+    this.exInfo = 'Ingen info'
     console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 
-function getAccounts() {
-    fs.readFile(__dirname + '/database/accounts.json', (err, val) =>{
-        if(err) throw err;
-        return JSON.parse(val);
-    })
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+  
+    res.redirect('/login')
 }
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return res.redirect('/admin')
+    }
+    next()
+}
+  
 
 
