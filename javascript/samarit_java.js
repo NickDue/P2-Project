@@ -25,6 +25,10 @@ function calculateVector(destinationX,destinationY,originX,originY){      //Udre
     return vector;   
 }
 
+function hej() {
+    console.log("hej")
+}
+
 function calculateVectorBetweenPoints(destinationX,destinationY,originX,originY){ //Udregner vektoren mellem to punkter og gemmer det i et array med navnet vec
     vec = [0,0];
     vec[0] = originX - destinationX;
@@ -70,6 +74,13 @@ async function getCases() {
     }
 }
 
+function cleanTable(){
+    let table = document.getElementById("samarittable");
+        while (table.row != null) {
+            table.deleteRow(0);
+        }
+}
+
 function updateTabel(para,i,table){
     let row = table.insertRow(); // adding new tr
         let cell1 = row.insertCell(); //adding new td
@@ -84,8 +95,12 @@ function updateTabel(para,i,table){
         cell3.innerHTML = para[i].coordY;
         cell4.innerHTML = para[i].exInfo;
         cell5.innerHTML = para[i].status.toString();
-        cell6.innerHTML = '<button type = "button" onClick = "acceptButt(\''+username+'\')" > Accept </button>' 
-                        + '<button type = "button" onClick = "rejectButt()" > Reject </button>';  // Giver to knapper med hhv. Accept og Reject, \''+XXX+'\' lader os sende en variabel i et funktionskald i HTML                        
+        cell6.innerHTML = '<button type = "button" onClick = "acceptButt(\''+username+'\'), userfunction(\''+username+'\')" > Accept </button>' 
+                        + '<button type = "button" onClick = "rejectButt(), userfunction(\''+username+'\')" > Reject </button>';  // Giver to knapper med hhv. Accept og Reject, \''+XXX+'\' lader os sende en variabel i et funktionskald i HTML                        
+}
+
+function userfunction (name) {
+    console.log(`User is ${name}`);
 }
 
 async function acceptButt (number) {
@@ -96,6 +111,7 @@ async function acceptButt (number) {
     })
     console.log("Info sent");
 }
+resizeBy
 function rejectButt () {
     console.log("You have rejected");
 } 
@@ -106,7 +122,6 @@ function rejectButt () {
 function movement(destinationX,destinationY,originX,originY){  
 
     let dice = 0;
-    let routeVector = [0,0];
     let routeVector = calculateVectorBetweenPoints(destinationX,destinationY,originX,originY) //Udregner vector mellem rapportør og samarit
     let dist = distanceBetweenPoints(originX,originY,destinationX,destinationY);              //Udregner afstanden mellem rapportør og samarit
     let enhedsvektorX = (1/(dist))*routeVector[0]; 

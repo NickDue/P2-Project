@@ -2,7 +2,7 @@ function getHelp() {
     let coordsX = prompt("Indtast dit X koordinat");
     let coordsY = prompt("Indtast dit Y koordinat");
 
-    if (coordsX != NaN && coordsY != NaN) {
+    if (coordsX != null && coordsY != null) {
         document.getElementById("demo").innerHTML = 
         "Dine koordinater er:" + coordsX + "X," + coordsY + "Y. Hjælp er på vej!";
         document.getElementById("info").style.display = "block";

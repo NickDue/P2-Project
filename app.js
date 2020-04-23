@@ -56,6 +56,9 @@ app.get('/samarit', (req,res) =>{
 app.get('/javascript/deltager.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/deltager.js')
 })
+app.get('/picture/arrow.png', (req,res) =>{
+    res.sendFile(__dirname + '/picture/arrow.png')
+})
 app.get('/javascript/samarit_java.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/samarit_java.js')
 })
@@ -125,6 +128,7 @@ app.post('/coords', (req, res) => {
                     let info = JSON.parse(chunk); // laver JSONstring om til noget vi kan læse og gemmer i info
                     objectCases[x] = new personCase(info,x); //constructor funktion, som laver et objekt med den info som er modtaget fra deltager.js
                     let caseToSend = JSON.stringify(objectCases);
+                    console.log(objectCases)
                     fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
                         if (error) throw error; 
                     })
@@ -137,7 +141,7 @@ app.listen(port, ()=>{
     console.log(`Server is now live @${port}`);
 });
 
-let objectCases = [];
+let objectCases = [];   
 let users = [];
 let x = 0;
 
@@ -163,7 +167,4 @@ function checkNotAuthenticated(req, res, next) {
       return res.redirect('/admin')
     }
     next()
-}
-  
-
-
+} 

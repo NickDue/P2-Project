@@ -1,9 +1,44 @@
 [
   {
     "number": 0,
-    "coordX": "2",
-    "coordY": "19",
+    "coordX": "1521",
+    "coordY": "512",
     "exInfo": "Ingen info",
-    "status": "Venter på accept"
+    "status": "Samarit er på sagen"
+  },
+  {
+    "number": 1,
+    "coordX": "512",
+    "coordY": "512",
+    "exInfo": "Ingen info",
+    "status": "Samarit er på sagen"
+  },
+  {
+    "number": 2,
+    "coordX": "52362",
+    "coordY": "6124",
+    "exInfo": "Ingen info",
+    "status": "Samarit er på sagen"
+  },
+  {
+    "number": 3,
+    "coordX": "1521",
+    "coordY": "512",
+    "exInfo": "Ingen info",
+    "status": "Samarit er på sagen"
+  },
+  {
+    "number": 4,
+    "coordX": "512",
+    "coordY": "512",
+    "exInfo": "Ingen info",
+    "status": "Samarit er på sagen"
+  },
+  {
+    "number": 5,
+    "coordX": "52362",
+    "coordY": "6124",
+    "exInfo": "Ingen info",
+    "status": "Samarit er på sagen"
   }
 ]
