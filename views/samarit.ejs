@@ -7,8 +7,7 @@
         <link rel = "stylesheet" href = "../css/style.css">
 
     </head>
-    <body>
-
+    <body onload="getCases()">
         <!-- While ( Samarit ikke er tæt på rapportør ) -->
         <img src = "../Pictures/arrow.png" alt = "pil" style = "transform:rotate(90deg)" id = "arrow">
         <button id = "rotate" onclick = "rotate()">Rotation</button>
@@ -62,10 +61,12 @@
                     <th>Koordinater</th>
                     <th>Dato</th>
                     <th>Information</th>
+                    <th>Status</th>
                     <th>Accepter / Afslå</th>
                 </tr>
             </table>
-            <script src = "../javascript/samarit_java.js"></script>
+            
+            <script src="../javascript/samarit_java.js"></script>
  
     </body>
 </html>

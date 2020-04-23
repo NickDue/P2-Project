@@ -51,7 +51,7 @@ app.get('/admin', checkAuthenticated, (req,res) =>{
     res.render('admin', { name: req.user.name });
 })
 app.get('/samarit', (req,res) =>{
-    res.sendFile(__dirname + '/html/samarit.html');
+    res.render('samarit');
 })
 app.get('/javascript/deltager.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/deltager.js')
@@ -83,7 +83,6 @@ app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
 
 app.post('/register',checkNotAuthenticated, async (req,res)=>{
     try {
-        console.log(req.body);
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         users.push({
             id: Date.now().toString(),
@@ -105,6 +104,19 @@ app.delete('/logout', (req, res) => {
 app.get('/updateTabel', (req, res) =>{
     res.writeHead(200, {"Content-type":"text/plain"});
     fs.createReadStream(__dirname + '/database/cases.json').pipe(res)
+})
+
+app.post('/accept',(req,res)=> {
+    res.writeHead(200,{"Content-type":"text/plain"})
+        req.on('data',function(chungus){
+            let number = JSON.parse(chungus);
+            objectCases[number].status = 'Samarit er på sagen';
+            console.log(objectCases[number].status);
+            fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
+                if (error) throw error; 
+            })
+        })
+        
 })
 
 app.post('/coords', (req, res) => {
@@ -134,7 +146,8 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.number = x; //nummeret på casen
     this.coordX = coord[0]; //X koordinat
     this.coordY = coord[1]; //Y koordinat
-    this.exInfo = 'Ingen info'
+    this.exInfo = 'Ingen info';
+    this.status = 'Venter på accept';
     console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 
