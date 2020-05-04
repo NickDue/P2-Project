@@ -36,14 +36,19 @@ app.use(passport.session())
 app.use(methodOveride('_method'))
 
 app.get('/', (req, res) => {
-    res.render('chooseaccount')
-})  
-app.get('/deltager', (req,res) =>{
     res.render('deltager')
+})  
+app.get('/account', (req,res) =>{
+    res.render('chooseaccount')
 })
 app.get('/register', (req,res)=>{
     res.render('register');
 });
+
+app.get('/allaccounts', (req,res)=>{
+    res.render('accounts',{ name: req.user.name });
+});
+
 app.get('/adminlogin',checkNotAuthenticated, (req,res)=>{
     res.render('adminlogin');
 });
@@ -64,6 +69,9 @@ app.get('/javascript/deltager.js', (req,res) =>{
 })
 app.get('/javascript/administrator.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/administrator.js')
+})
+app.get('/javascript/accounts.js', (req,res) =>{
+    res.sendFile(__dirname + '/javascript/accounts.js')
 })
 app.get('/picture/arrow.png', (req,res) =>{
     res.sendFile(__dirname + '/picture/arrow.png')
@@ -102,7 +110,7 @@ app.post('/samaritlogin',checkNotAuthenticated, passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.post('/register',checkNotAuthenticated, async (req,res)=>{
+app.post('/register', async (req,res)=>{
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         users.push({
@@ -114,22 +122,25 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
         fs.writeFile(__dirname + '/database/accounts.json', JSON.stringify(users, null, 2), (error) => {
             if (error) throw error; 
         })
-        console.log(users)
         res.redirect('/admin');
     } catch {
         res.redirect('/register')
     }
-    console.log(users);
 })
 
 app.delete('/logout', (req, res) => {
     req.logOut()
-    res.redirect('/')
+    res.redirect('/account')
 })
 
 app.get('/updateTabel', (req, res) =>{
     res.writeHead(200, {"Content-type":"text/plain"});
     fs.createReadStream(__dirname + '/database/cases.json').pipe(res)
+})
+
+app.get('/accounts', (req, res) =>{
+    res.writeHead(200, {"Content-type":"text/plain"});
+    fs.createReadStream(__dirname + '/database/accounts.json').pipe(res)
 })
 
 app.post('/accept',(req,res)=> {
@@ -170,7 +181,18 @@ app.post('/coords', (req, res) => {
                     x++;
                 })
 })
-
+app.post('/goback',(req,res)=>{
+    req.on('data',function(c){
+        let number = JSON.parse(c);
+        console.log(number)
+        res.redirect('/samarit')
+        objectCases[number].status = 'Ledig';
+        console.log(objectCases[number].status);
+        fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
+            if (error) throw error; 
+        })
+    }) 
+})
 
 app.listen(port, ()=>{
     console.log(`Server is now live @${port}`);
@@ -179,6 +201,7 @@ app.listen(port, ()=>{
 let objectCases = [];   
 let users = [];
 loadAccounts();
+loadCases();
 x=0;
 
 function personCase(info, x) { //Vores constructer funktion der laver cases
@@ -186,6 +209,7 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.number = x; //nummeret på casen
     this.coordX = coord[0]; //X koordinat
     this.coordY = coord[1]; //Y koordinat
+    this.date   = currentDate();
     this.exInfo = 'Ingen info';
     this.status = 'Ledig';
     console.log(this.coordX + "+" + this.coordY + "+" + this.number);
@@ -212,7 +236,38 @@ function loadAccounts(){
         for (e of object){
             users.push(e)
         }
-        
         //console.log("Accounts loaded");
     });
+}
+function loadCases(){
+    fs.readFile(__dirname + '/database/cases.json', (err, val) =>{
+        if (err) throw err;
+        let object = JSON.parse(val);
+        if(object.length === 1){
+            objectCases.push(object[0])
+        }
+        else if(object.length > 2) { 
+            for (e of object){
+                objectCases.push(e);
+                x++;
+            }  
+        }
+        else {
+            console.log("No existing cases");
+        }
+    });
+}
+
+
+function currentDate () {
+    let right_now = new Date();
+    let year = right_now.getFullYear();
+    let month = right_now.getMonth()+1;
+    let day = right_now.getDate();
+    let hour = right_now.getHours();
+    let minute = right_now.getMinutes()
+    if (minute < 10) {
+        minute = "0"+minute
+    }
+    return day + '/' + month + "-" + year + ", kl " + hour + ":" + minute;
 }

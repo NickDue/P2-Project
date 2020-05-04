@@ -41,36 +41,7 @@ function distanceBetweenPoints(deltX, deltY, samX, samY){ //Udregner afstanden m
     
     return dist;
 }
-//-----------------------------------------Movement.js---------------------------------------------------
-// Disse funktioner nedenunder bruges til at simulere bevægelse
 
-function movement(deltagerX,deltagerY,samaritX,samaritY){  
-
-    let dice = 0;
-    let routeVector = calculateVectorBetweenPoints(deltagerX,deltagerY,samaritX,samaritY) //Udregner vector mellem rapportør og samarit
-    let dist = distanceBetweenPoints(samaritX,samaritY,deltagerX,deltagerY);              //Udregner afstanden mellem rapportør og samarit
-    let enhedsvektorX = (1/(dist))*routeVector[0]; 
-    let enhedsvektorY = (1/(dist))*routeVector[1];
-    let position = [samaritX,samaritY];
-    let distance = 1000;     //Arbitrær stor værdi således at while loopet ikke stopper før distance er blevet tilskrevet værdi senere.
-    while(distance > 5) {    //Når origin er nærmere end 5 enheder målet stopper loopet
-        dice = randomDice(); //Random number generator der bruges til at udregne chance for at samaritten går forkert
-        if (dice <= 98) {    //SAMARITTEN GÅR KORREKT
-            distance = distanceBetweenPoints(position[0],position[1],deltagerX,deltagerY)
-            position[0] += enhedsvektorX;
-            position[1] += enhedsvektorY;
-            //console.log(distance);
-            }
-        else {     //SAMARITTEN GÅR FORKERT
-            position[0] += enhedsvektorX*Math.random()*51;
-            position[1] += enhedsvektorY*Math.random()*51;
-            dist = distanceBetweenPoints(position[0],position[1],deltagerX,deltagerY);
-            enhedsvektorX = (1/(dist))*(deltagerX-position[0]);
-            enhedsvektorY = (1/(dist))*(deltagerY-position[1]);
-           // console.log("check here"); UDKOMMENTER HVIS DER SKAL TJEKKES HVOR OFTE SAMARITTEN GÅR FORKERT I LOG
-            }
-    }
-}
 
 function randomDice(){  //Random nummer generator funktion - giver et tal mellem 1 og 100 (math.random floor tal)    
     number = Math.random()*101;
@@ -143,8 +114,6 @@ function drawPosition(){
     }
 }
 
-
-
 function keyPush(evt) {
     switch(evt.keyCode) {
         case 37: //venstre
@@ -173,3 +142,14 @@ async function afslutSag() {
     window.location.assign("http://localhost:3160/samarit"); 
 }
 
+
+const cantCompleteAPI = "http://127.0.0.1:3160/goback"
+
+async function cantComplete() {
+    let caseToFinish = JSON.stringify(caseNumber);
+    await fetch(cantCompleteAPI, {
+        method: 'POST',
+        body: caseToFinish
+    })
+    window.location.assign("http://localhost:3160/samarit"); 
+}

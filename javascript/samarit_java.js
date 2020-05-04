@@ -91,7 +91,7 @@ function updateTabel(para,i,table){
         cell1.innerHTML = para[i].number + 1;
         cell2.innerHTML = para[i].coordX;
         cell3.innerHTML = para[i].coordY;
-        cell4.innerHTML = currentDate();
+        cell4.innerHTML = para[i].cu;
         cell5.innerHTML = para[i].exInfo;
         cell6.innerHTML = para[i].status.toString();
         if(para[i].status.toLowerCase() == "ledig") {

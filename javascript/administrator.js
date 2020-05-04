@@ -3,7 +3,7 @@ const registerAPI = "http://127.0.0.1:3160/register";
 
 async function getCases() {
     let table = document.getElementById("samarittable");
-    table.innerHTML = '<tr><th>Navn</th><th>Koordinater</th><th>Dato</th><th>Information</th><th>Status</th><th>Accepter / Afslå</th></tr>'
+    table.innerHTML = '<tr>' + '<th>Case-nr</th>' + '<th>X-Koordinat</th>' + '<th>Y-Koordinat</th>' + '<th>Dato</th>' + '<th>Information</th>' + '<th>Status</th>' + '</tr>'
     let element = await fetch(tabelAPI);
     let para = await element.json();
     for (let i = 0; i < para.length; i++) {
@@ -17,12 +17,14 @@ function updateTabel(para,i,table){
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
         let cell5 = row.insertCell();
+        let cell6 = row.insertCell();
         let username = para[i].number; // Tildeler et nummer til en bruger
         cell1.innerHTML = para[i].number;
         cell2.innerHTML = para[i].coordX;
         cell3.innerHTML = para[i].coordY;
-        cell4.innerHTML = para[i].exInfo;
-        cell5.innerHTML = para[i].status.toString();                        
+        cell4.innerHTML = para[i].date ;
+        cell5.innerHTML = para[i].exInfo;
+        cell6.innerHTML = para[i].status.toString();                        
 }
 
 

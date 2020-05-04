@@ -6,23 +6,17 @@
     <title>Document</title>
     <link rel = "stylesheet" href = "../css/login.css">
 </head>
-<body>
+<body onload="getCases()">
     <%- include('partials/usernav.ejs') -%>
 
     <h1>Admin overskrift</h1> <!--Overskrift-->
     <table id = "samarittable" style = "width:75%">
-        <tr>
-            <th>Navn</th>
-            <th>Koordinater</th>
-            <th>Dato</th>
-            <th>Information</th>
-        </tr>
+        
     </table>
 
     <button type = "button" onclick="getCases()">Opdater tabel</button> 
     <a href="register"><button type = "button">Registrer brugere</button> </a>
-    
-        
+            
     <script src="../javascript/administrator.js"></script>
     
 </body>
