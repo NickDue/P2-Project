@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang = "da">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <title>Direction page</title>
+        <link rel = "stylesheet" href = "../css/style.css">
+    </head>
+
+    <body onload="getCoords(<%= parseInt(something) %>)">
+        <%- include('partials/usernav.ejs') -%>
+        <img src = "../picture/arrow.png" style="transform:rotate(90deg)" id = "arrow">
+        <button id = "rotate">Rotate arrow</button>
+        <p> WELCOME </p>
+        <h1>This is case number <%= parseInt(something)+1 %></h1>
+        <div id="div1"></div>
+        <h2> Distance</h2>
+        <p id="distanceHTML"></p>
+        <button type="button" onclick="afslutSag()">
+            Afslut sag
+        </button>
+        <button onclick="">
+            Kan ikke gennemføre
+        </button>
+        <canvas id="gameCanvas" width="100" height="100"></canvas>
+        <script src="../javascript/direction.js"></script>
+    </body>
+</html>

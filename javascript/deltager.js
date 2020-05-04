@@ -1,6 +1,6 @@
 function getHelp() {
-    let coordsX = prompt("Indtast dit X koordinat");
-    let coordsY = prompt("Indtast dit Y koordinat");
+    let coordsX = Math.floor(randomDice())
+    let coordsY = Math.floor(randomDice())
 
     if (coordsX != null && coordsY != null) {
         document.getElementById("demo").innerHTML = 
@@ -20,6 +20,10 @@ async function sendCoords (x, y) { // Det er en async funktion fordi at den skal
     })
     console.log("Info sent");
 }
-
+function randomDice(){  //Random nummer generator funktion - giver et tal mellem 1 og 100 (math.random floor tal)    
+    number = Math.random()*101;
+    //console.log(number);
+    return number;
+}
 
 //let data = JSON.stringify("X er " + x + " og Y er " + y);

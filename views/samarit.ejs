@@ -7,28 +7,21 @@
         <link rel = "stylesheet" href = "../css/style.css">
 
     </head>
+
     <body onload="getCases()">
-        <!-- While ( Samarit ikke er tæt på rapportør ) -->
+        <!-- While ( Samarit ikke er tæt på rapportør ) 
         <img src = "../picture/arrow.png" style="transform:rotate(90deg)" id = "arrow">
-        <button id = "rotate" onclick = "rotate()">Rotation</button>
-        <button type = "button" onclick = "hej()">Opdater tabel</button> 
-        <%- include('partials/nav.ejs') -%>
+        <button id = "rotate" onclick = "rotate()">Rotation</button>-->
+        <button type = "button" onclick = "getCases()">Opdater tabel</button> 
+        <%- include('partials/usernav.ejs') -%>
         <!--Se opgaverne som er sendt til samaritten acceptere og afkræfte-->
             <!-- allokeret plads vise en pil-->
             <h1>Samarit overskrift</h1> <!--Overskrift-->
             <table id = "samarittable" style = "width:75%">
                 <tr>
-                    <th>Navn</th>
-                    <th>Koordinater</th>
-                    <th>Dato</th>
-                    <th>Information</th>
-                    <th>Status</th>
-                    <th>Accepter / Afslå</th>
                 </tr>
             </table>
             
-        <script src="../javascript/samarit_java.js"></script>
-            
- 
+        <script src="../javascript/samarit_java.js"></script>        
     </body>
 </html>

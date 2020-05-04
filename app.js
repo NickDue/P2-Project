@@ -35,26 +35,35 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOveride('_method'))
 
-app.get('/' || '/start', (req, res) => {
-    res.render('start')
+app.get('/', (req, res) => {
+    res.render('chooseaccount')
 })  
 app.get('/deltager', (req,res) =>{
     res.render('deltager')
 })
-app.get('/register',checkNotAuthenticated, (req,res)=>{
+app.get('/register', (req,res)=>{
     res.render('register');
 });
-app.get('/login',checkNotAuthenticated, (req,res)=>{
-    res.render('login');
+app.get('/adminlogin',checkNotAuthenticated, (req,res)=>{
+    res.render('adminlogin');
 });
-app.get('/admin', checkAuthenticated, (req,res) =>{
-    res.render('admin', { name: req.user.name });
+app.get('/samaritlogin',checkNotAuthenticated, (req,res)=>{
+    res.render('samaritlogin');
+});
+app.get('/admin', checkAuthenticated, (req,res) =>{  
+    res.render('admin', { name: req.user.name }) 
+})
+app.get('/direction/:id', checkAuthenticated, (req,res) =>{ 
+    res.render('direction', { name: req.user.name, something: req.params.id});
 })
 app.get('/samarit', (req,res) =>{
-    res.render('samarit');
+    res.render('samarit', { name: req.user.name });
 })
 app.get('/javascript/deltager.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/deltager.js')
+})
+app.get('/javascript/administrator.js', (req,res) =>{
+    res.sendFile(__dirname + '/javascript/administrator.js')
 })
 app.get('/picture/arrow.png', (req,res) =>{
     res.sendFile(__dirname + '/picture/arrow.png')
@@ -64,6 +73,9 @@ app.get('/javascript/samarit_java.js', (req,res) =>{
 })
 app.get('/javascript/movement.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/movement.js')
+})
+app.get('/javascript/direction.js', (req,res) =>{
+    res.sendFile(__dirname + '/javascript/direction.js')
 })
 app.get('/javascript/login.js', (req,res) =>{
     res.sendFile(__dirname + '/javascript/login.js')
@@ -78,9 +90,15 @@ app.get('/css/start.css', (req, res) => {
     res.sendFile(__dirname + '/css/start.css');
 })
 
-app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
+app.post('/adminlogin',checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/admin',
-    failureRedirect: '/login',
+    failureRedirect: '/adminlogin',
+    failureFlash: true
+}))
+
+app.post('/samaritlogin',checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/samarit',
+    failureRedirect: '/samaritlogin',
     failureFlash: true
 }))
 
@@ -90,9 +108,14 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
         users.push({
             id: Date.now().toString(),
             name: req.body.name,
-            password: hashedPassword
+            password: hashedPassword,
+            permissions: req.body.rights
         })
-        res.redirect('/login');
+        fs.writeFile(__dirname + '/database/accounts.json', JSON.stringify(users, null, 2), (error) => {
+            if (error) throw error; 
+        })
+        console.log(users)
+        res.redirect('/admin');
     } catch {
         res.redirect('/register')
     }
@@ -101,7 +124,7 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
 
 app.delete('/logout', (req, res) => {
     req.logOut()
-    res.redirect('/login')
+    res.redirect('/')
 })
 
 app.get('/updateTabel', (req, res) =>{
@@ -110,16 +133,28 @@ app.get('/updateTabel', (req, res) =>{
 })
 
 app.post('/accept',(req,res)=> {
-    res.writeHead(200,{"Content-type":"text/plain"})
         req.on('data',function(chungus){
             let number = JSON.parse(chungus);
-            objectCases[number].status = 'Samarit er på sagen';
+            res.redirect('/direction/'+number)
+            objectCases[number].status = 'Optaget';
             console.log(objectCases[number].status);
             fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
                 if (error) throw error; 
             })
+        })      
+})
+
+app.post('/finish',(req,res)=> {
+    req.on('data',function(c){
+        let number = JSON.parse(c);
+        console.log(number)
+        res.redirect('/samarit')
+        objectCases[number].status = 'Afsluttet';
+        console.log(objectCases[number].status);
+        fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
+            if (error) throw error; 
         })
-        
+    })      
 })
 
 app.post('/coords', (req, res) => {
@@ -143,7 +178,8 @@ app.listen(port, ()=>{
 
 let objectCases = [];   
 let users = [];
-let x = 0;
+loadAccounts();
+x=0;
 
 function personCase(info, x) { //Vores constructer funktion der laver cases
     let coord = info.toString().split(','); // laver info object om til en string og splitter derefter elementer fordelt med "," og gemmes i et array.
@@ -151,7 +187,7 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.coordX = coord[0]; //X koordinat
     this.coordY = coord[1]; //Y koordinat
     this.exInfo = 'Ingen info';
-    this.status = 'Venter på accept';
+    this.status = 'Ledig';
     console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 
@@ -160,7 +196,7 @@ function checkAuthenticated(req, res, next) {
       return next()
     }
   
-    res.redirect('/login')
+    res.redirect('/samaritlogin')
 }
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -168,3 +204,15 @@ function checkNotAuthenticated(req, res, next) {
     }
     next()
 } 
+
+function loadAccounts(){
+    fs.readFile(__dirname + '/database/accounts.json', (err, val) =>{
+        if (err) throw err;
+        let object = JSON.parse(val);
+        for (e of object){
+            users.push(e)
+        }
+        
+        //console.log("Accounts loaded");
+    });
+}

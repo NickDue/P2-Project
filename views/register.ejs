@@ -11,7 +11,7 @@
     <main>
         <div>
             <h1 class="headline">
-                Registre end ny samarit bruger
+                Registrer en ny samarit bruger
             </h1>
             <p class="guidelines">
                 Her kan du som administrator oprette en ny samarit bruger <br>
@@ -19,16 +19,21 @@
             </p>
             <div class="login-form">
                 <form action="register" method="POST">
-                    <label for="name"></label>
+                    <label for="name">Username:</label>
                     <input type="text" name="name" id="name" placeholder="Enter Username" required><br>
-                    <label for="password"></label>
-                    <input type="password" name="password" id="password" placeholder="Enter Password" required><br>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" placeholder="Enter password" required><br>
+                    <label for="rights">Rettigheder:</label>
+                    <select name="rights" id="rights">
+                        <option value="admin">Administrator</option>
+                        <option value="samarit">Samarit</option>
+                    </select>
                     <button type="submit">Register</button>
                 </form>
             </div>
         </div>
     </main> 
-    <script src="../javascript/login.js"></script>
+    <script src="../javascript/login.js"></script> <!-- Er det her rigtigt? -->
     
 </body>
 </html>

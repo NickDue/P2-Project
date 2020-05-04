@@ -1,17 +1,50 @@
 [
   {
-    "name": "admin",
-    "password": "$2b$10$Op/3BjbsfMRv.bPGlUFpP.MKX3YbVBPPfyr7c4OeU87N4DNtJIzxe",
-    "id": "1587120157289"
+    "id": "1587640176993",
+    "name": "adminasf",
+    "password": "$2b$10$BAv/FvyCAwgDYEBBXP4ygeEJ4VA932oRb40ATO.bL9alnW6HeFvRe",
+    "permissions": "admin"
   },
   {
-    "name": "admin",
-    "password": "$2b$10$hD7IfGvjj4S/Xp2Xb8343eU9V4mHsXF33IVoICKHtvq/OBrwsYB5.",
-    "id": "1587120184961"
+    "id": "1587640187330",
+    "name": "no",
+    "password": "$2b$10$6LMCl0ZxUXGCDUAl7DOnmOugE9l3GiqMVNIOmRO4EJf.4KZ5a6hty",
+    "permissions": "admin"
   },
   {
-    "name": "1",
-    "password": "$2b$10$.88OR3Hjtcg7iTnXJ3AkSe3aAjY8kf9azuIZWzBG7qYZN5VfCXSQy",
-    "id": "1587120249639"
+    "id": "1587640327341",
+    "name": "nick",
+    "password": "$2b$10$K35Hfn2pLExnxO8lAuZ/tu2pc/A1ZTTIzSOBY/zNx1wB4d3CgzhyO",
+    "permissions": "admin"
+  },
+  {
+    "id": "1587640468679",
+    "name": "bo",
+    "password": "$2b$10$T4wsH4k3I2KkVPbOjCoLku5mB2c/GmhojufYfLNE6so6PoWLyqucK",
+    "permissions": "samarit"
+  },
+  {
+    "id": "1587641091014",
+    "name": "admin",
+    "password": "$2b$10$a9r4E/Q68hzOuE8ArQBlfenPPRI2OlxHADpEWs9ILXZFQTIYEopyW",
+    "permissions": "admin"
+  },
+  {
+    "id": "1588161058676",
+    "name": "no",
+    "password": "$2b$10$J/2bVXHUM4fGwRlSv57.6.MimmfapF2yMLTHFYIIz8XTT8l8ogn3W",
+    "permissions": "admin"
+  },
+  {
+    "id": "1588161074980",
+    "name": "no",
+    "password": "$2b$10$z4Y/W8/2aR/1i7uqQ93zd.5OYTOlKd/4c1xfKwxev6EtFgrtHVvdq",
+    "permissions": "admin"
+  },
+  {
+    "id": "1588161085441",
+    "name": "no",
+    "password": "$2b$10$Xn1.14M59O5aSi44up135ugDHfX06VSjwrtCto.n9luczN0bGsAKC",
+    "permissions": "admin"
   }
 ]

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "../css/login.css">
+</head>
+<body>
+    <%- include('partials/nav.ejs') -%>
+    <main>
+        <div>
+            <h1 class="headline">
+                Samarit Login
+            </h1>
+            <p class="guidelines">
+                Indtast dit username og password i boksene nedenunder. <br>
+                Dit username og password vil være tildelt af din administrator. <br>
+                Ved problemer, kontakt venligst din administrator. <br>
+            </p>
+            <% if(messages.error) { %> 
+                <%= messages.error %> 
+            <% } %> 
+            <div class="login-form">
+                <form action="samaritlogin" method="POST">
+                    <label for="name"></label>
+                    <input type="text" name="name" id="name" placeholder="Enter Username" required><br>
+                    <label for="password"></label>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required><br>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </main> 
+    <script src="../javascript/login.js"></script>
+    
+</body>
+</html>
