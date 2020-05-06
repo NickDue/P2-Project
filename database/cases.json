@@ -1,58 +1,38 @@
 [
   {
     "number": 0,
-    "coordX": "53",
-    "coordY": "58",
-    "date": "4/5-2020, kl 13:31",
+    "coordX": "75",
+    "coordY": "50",
+    "date": "5/5-2020, kl 10:16",
     "exInfo": "Ingen info",
-    "status": "Ledig"
+    "status": "Ledig",
+    "samarit": "Ingen"
   },
   {
     "number": 1,
-    "coordX": "84",
-    "coordY": "28",
-    "date": "4/5-2020, kl 13:31",
+    "coordX": "39",
+    "coordY": "9",
+    "date": "5/5-2020, kl 10:16",
     "exInfo": "Ingen info",
-    "status": "Ledig"
+    "status": "Ledig",
+    "samarit": "Ingen"
   },
   {
     "number": 2,
-    "coordX": "6",
-    "coordY": "90",
-    "date": "4/5-2020, kl 13:31",
+    "coordX": "75",
+    "coordY": "50",
+    "date": "5/5-2020, kl 10:18",
     "exInfo": "Ingen info",
-    "status": "Ledig"
+    "status": "Ledig",
+    "samarit": "Ingen"
   },
   {
     "number": 3,
-    "coordX": "49",
-    "coordY": "99",
-    "date": "4/5-2020, kl 13:31",
+    "coordX": "39",
+    "coordY": "9",
+    "date": "5/5-2020, kl 10:18",
     "exInfo": "Ingen info",
-    "status": "Ledig"
-  },
-  {
-    "number": 4,
-    "coordX": "13",
-    "coordY": "88",
-    "date": "4/5-2020, kl 13:31",
-    "exInfo": "Ingen info",
-    "status": "Ledig"
-  },
-  {
-    "number": 5,
-    "coordX": "49",
-    "coordY": "58",
-    "date": "4/5-2020, kl 13:31",
-    "exInfo": "Ingen info",
-    "status": "Ledig"
-  },
-  {
-    "number": 6,
-    "coordX": "23",
-    "coordY": "57",
-    "date": "4/5-2020, kl 13:31",
-    "exInfo": "Ingen info",
-    "status": "Ledig"
+    "status": "Ledig",
+    "samarit": "Ingen"
   }
 ]

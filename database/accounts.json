@@ -4,47 +4,5 @@
     "name": "admin",
     "password": "$2b$10$a9r4E/Q68hzOuE8ArQBlfenPPRI2OlxHADpEWs9ILXZFQTIYEopyW",
     "permissions": "admin"
-  },
-  {
-    "id": "1588589221783",
-    "name": "1",
-    "password": "$2b$10$y8kGNquZ.qPzsCyo/DhZ5OuSOM4JxNDAVGOwdjTjIdZZ8HFw4A8/W",
-    "permissions": "admin"
-  },
-  {
-    "id": "1588589758433",
-    "name": "no",
-    "password": "$2b$10$ZxHMA9VgEOePOOJxW0/akOVjXr6tcxLILkDFhQviHjSGrCyTGZl3G",
-    "permissions": "admin"
-  },
-  {
-    "id": "1588589831509",
-    "name": "2",
-    "password": "$2b$10$AtqIbr9Enq8MC0laK.tNIeNuQF/gUFUluMdQs/cvPTnjMEe15wU12",
-    "permissions": "admin"
-  },
-  {
-    "id": "1588589861521",
-    "name": "3",
-    "password": "$2b$10$GFwrEeYGCzxMGKOu6n5mDeT3knQjgQJHuY4UvJygVYUkx.6rrkNui",
-    "permissions": "admin"
-  },
-  {
-    "id": "1588593391085",
-    "name": "Jonas",
-    "password": "$2b$10$X2GlMvPIXTHRRXqMM56PMOsM1089u/ksLv6nahyVefR4RrtbE2iIO",
-    "permissions": "samarit"
-  },
-  {
-    "id": "1588593396424",
-    "name": "bo",
-    "password": "$2b$10$gKqiJkQhj1mVXIvvfTFDmO82guqsfhihrmxjum8bhuKHiQn4.cVN6",
-    "permissions": "admin"
-  },
-  {
-    "id": "1588593402324",
-    "name": "drejer",
-    "password": "$2b$10$o0G9S3HvLt4rNyW1ARQOaOnCvIAWjwA2dy.O2hhTkWZhZX61QMFtC",
-    "permissions": "samarit"
   }
 ]

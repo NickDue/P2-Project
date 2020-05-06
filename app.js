@@ -122,7 +122,7 @@ app.post('/register', async (req,res)=>{
         fs.writeFile(__dirname + '/database/accounts.json', JSON.stringify(users, null, 2), (error) => {
             if (error) throw error; 
         })
-        res.redirect('/admin');
+        res.redirect('/allaccounts');
     } catch {
         res.redirect('/register')
     }
@@ -155,6 +155,24 @@ app.post('/accept',(req,res)=> {
         })      
 })
 
+app.post('/adminStatus',(req,res)=> {
+    req.on('data',function(chungus){
+        let number = JSON.parse(chungus);
+        if(number[1] == 24){
+            objectCases[number[0]].status = 'Afsluttet';
+        }
+        else if(number[1] == 88){
+            objectCases[number[0]].status = 'Optaget';
+        }
+        else if(number[1] == 55){
+            objectCases[number[0]].status = 'Ledig';
+        }
+        fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
+            if (error) throw error; 
+        })
+    })      
+})
+
 app.post('/finish',(req,res)=> {
     req.on('data',function(c){
         let number = JSON.parse(c);
@@ -181,6 +199,7 @@ app.post('/coords', (req, res) => {
                     x++;
                 })
 })
+
 app.post('/goback',(req,res)=>{
     req.on('data',function(c){
         let number = JSON.parse(c);
@@ -192,6 +211,17 @@ app.post('/goback',(req,res)=>{
             if (error) throw error; 
         })
     }) 
+})
+
+app.post('/deleteAccount',(req,res)=>{
+    req.on('data',function(del){
+        let toBeDeleted = JSON.parse(del);
+        users = users.filter(iden => iden.id != parseInt(toBeDeleted))
+        fs.writeFile(__dirname + '/database/accounts.json', JSON.stringify(users, null, 2), (error) => {
+            if (error) throw error; 
+        })
+        
+    })
 })
 
 app.listen(port, ()=>{
@@ -212,6 +242,7 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.date   = currentDate();
     this.exInfo = 'Ingen info';
     this.status = 'Ledig';
+    this.samarit = 'Ingen';
     console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 

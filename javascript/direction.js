@@ -62,7 +62,7 @@ async function getdata(number) {
 }
 
 // initialize config variables here
-let canvas, ctx
+let canvas, ctx;
 
 let deltagerX;
 let deltagerY;
@@ -74,43 +74,44 @@ let caseNumber;
 // setup config variables and start the program
 async function getCoords (number) {
     // set our config variables
-    caseNumber = number
+    caseNumber = number;
     let apiDATA = await fetch(tabelAPI);
     globalCoords = await apiDATA.json();
-    canvas = document.getElementById('gameCanvas')
-    ctx = canvas.getContext('2d')
-    deltagerX = globalCoords[caseNumber].coordX
-    deltagerY = 99-globalCoords[caseNumber].coordY
-    samaritX=Math.floor(randomDice())
-    samaritY=Math.floor(randomDice())
-    ctx.beginPath()
-    ctx.fillStyle="red"
-    ctx.fillRect(deltagerX, deltagerY, 1, 1)
-    ctx.fillStyle="black"
-    ctx.fillRect(samaritX, samaritY, 1, 1)
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+    deltagerX = globalCoords[caseNumber].coordX;
+    deltagerY = 99-globalCoords[caseNumber].coordY;
+    samaritX=Math.floor(randomDice());
+    samaritY=Math.floor(randomDice());
+    ctx.beginPath();
+    ctx.fillStyle="red";
+    ctx.fillRect(deltagerX, deltagerY, 1, 1);
+    ctx.fillStyle="black";
+    ctx.fillRect(samaritX, samaritY, 1, 1);
 
     document.addEventListener("keydown",keyPush);
-    setInterval(drawPosition,1000/10)
-  }
-
+    t = setInterval(drawPosition,1000/10);    //Opdaterer funktionen drawPosition 10 gange i sekundet
+}
+let t;
 function drawPosition(){
-    canvas = document.getElementById('gameCanvas')
-    ctx = canvas.getContext('2d')
-    ctx.beginPath()
-    ctx.fillStyle="red"
-    ctx.fillRect(deltagerX, deltagerY, 1, 1)
-    ctx.fillStyle="black"
-    ctx.fillRect(samaritX, samaritY, 1, 1)
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.fillStyle="red";
+    ctx.fillRect(deltagerX, deltagerY, 1, 1);
+    ctx.fillStyle="black";
+    ctx.fillRect(samaritX, samaritY, 1, 1);
     let angleForVector = calculateVector(deltagerX,deltagerY,samaritX,samaritY);
     let arrow = document.getElementById("arrow");
     arrow.style.transform = `rotate(${angleForVector.angle+180}deg)`    //Ændrer style attributen transform i samarit.html
     console.log(calculateVector(deltagerX, deltagerY, samaritX, samaritY));
-    let distance=distanceBetweenPoints(deltagerX, deltagerY, samaritX, samaritY)
-    let distanceHTML=document.getElementById("distanceHTML")
-    distanceHTML.innerHTML=Math.floor(distance)
-    if(samaritX === deltagerX && samaritY == deltagerY) {
-        let arrow = document.getElementById("arrow");
-        arrow.parentNode.removeChild(arrow)
+    let distance = distanceBetweenPoints(deltagerX, deltagerY, samaritX, samaritY);
+    let distanceHTML = document.getElementById("distanceHTML");
+    distanceHTML.innerHTML = Math.floor(distance);
+    
+    if(distance <= 5) {
+        clearInterval(t);  // Når at samaritten er 5 meter eller mindre fra rapportøren, opdateres drawPosition funktionen ikke længere 
+        alert("Du er der");
     }
 }
 
