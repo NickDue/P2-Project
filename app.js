@@ -200,6 +200,23 @@ app.post('/coords', (req, res) => {
                 })
 })
 
+app.post("/moreinfo", (req,res) =>{
+    res.writeHead(200, {"Content-type":"text/plain"}); // Serveren siger ok, og tak for data, til clienten
+        req.on('data', function(chunk){
+            let info = JSON.parse(chunk);
+            for(e of objectCases) {
+                if(parseInt(e.coordX) === info[0] && parseInt(e.coordY) === info[1])
+                e.exInfo = info[2];
+                fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
+                    if (error) throw error; 
+                })
+                break;
+            }
+            
+            
+        })
+})
+
 app.post('/goback',(req,res)=>{
     req.on('data',function(c){
         let number = JSON.parse(c);

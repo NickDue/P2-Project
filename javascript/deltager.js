@@ -1,14 +1,18 @@
 function getHelp() {
-    let coordsX = Math.floor(randomDice())
-    let coordsY = Math.floor(randomDice())
+    coordsX = Math.floor(randomDice())
+    coordsY = Math.floor(randomDice())
 
     if (coordsX != null && coordsY != null) {
         document.getElementById("demo").innerHTML = 
         "Dine koordinater er:" + coordsX + "X," + coordsY + "Y. Hjælp er på vej!";
         document.getElementById("info").style.display = "block";
+        document.getElementById("helpMe").style.display = "none";
         sendCoords(coordsX, coordsY);
     }
 }
+
+let coordsX;
+let coordsY;
 
 const coordsAPI = "http://127.0.0.1:3160/coords"; //vores gren på serveren vi gerne vil tilgå
 
@@ -26,4 +30,16 @@ function randomDice(){  //Random nummer generator funktion - giver et tal mellem
     return number;
 }
 
-//let data = JSON.stringify("X er " + x + " og Y er " + y);
+const infoAPI = "http://127.0.0.1:3160/moreinfo"
+
+async function sendAdditionalInfo(information) {
+    
+    let array = [coordsX, coordsY, information.value];
+    document.getElementById("theend").style.display = "block";
+    document.getElementById("theend").style.backgroundColor = "white";
+    await fetch(infoAPI, {
+        method: "POST",
+        body: JSON.stringify(array)
+    })
+    
+}

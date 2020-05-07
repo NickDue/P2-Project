@@ -9,11 +9,19 @@
   <body>
     <h1>Deltager</h1>
     <!--<script src = "../javascript/movement.js"></script> !-->     
-    <button onclick = "getHelp();" class="button-text">
+    <button onclick = "getHelp()" class="button-text" id="helpMe">
         Hjælp mig
     </button>
     <p id = "demo"></p>
-    <p id = "info" style = "display: none;">Hvis du har yderligere information, indtast her: <input type = "text" id = "addInfo"> </p>
+    <div id = "info" style = "display: none;">Hvis du har yderligere information, indtast her: <br> 
+        <h3>Brug en kort forklaring for hvad du fejler, f.eks. "Brækket ben", "Høj Feber" eller lignende</h3>
+      <input type="text" id="newinfo" placeholder="Skriv her" required> <br>
+        <button onclick="sendAdditionalInfo(newinfo)">Submit Info</button>
+    </div>
+
+    <div id="theend" style="display: none;">
+      <h1>Vi har modtaget din sag, og en samarit kommer hurtigst muligt!</h1>
+    </div>
 
     </body>
     <script src = "../javascript/deltager.js"></script>

@@ -22,11 +22,11 @@ function updateTabel(para,i,table){
         let cell7 = row.insertCell();
         let casenr = para[i].number; // Tildeler et nummer til en bruger
         cell1.innerHTML = para[i].number;
-        cell2.innerHTML = para[i].coordX;
-        cell3.innerHTML = para[i].coordY;
-        cell4.innerHTML = para[i].date ;
-        cell5.innerHTML = para[i].exInfo;
-        cell6.innerHTML = para[i].status.toString(); 
+        cell2.innerHTML = para[i].coordX;  // Rapportørens X koordinat
+        cell3.innerHTML = para[i].coordY;  // Rapportørens Y koordinat
+        cell4.innerHTML = para[i].date ;  //Dato for casens oprettelse
+        cell5.innerHTML = para[i].exInfo;  // Evt. yderligere information
+        cell6.innerHTML = para[i].status.toString();  // Status for case
         cell7.innerHTML = '<button id=\''+casenr+'\' onClick="ledigButt(\''+casenr+'\')" > Ledig </button> <button id=\''+casenr+'\' onClick="optagetButt(\''+casenr+'\')" > Optaget </button> <button id=\''+casenr+'\' onClick="afslutButt(\''+casenr+'\')" > Afsluttet </button>';                        
 }
 

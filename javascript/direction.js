@@ -29,7 +29,6 @@ function calculateAngleVector(vec){ // Udregner vinklen mellem to vektorer - Vek
 
     n = (x1 * x2 + y1 * y2) / (Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)) * Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
     radians = Math.acos(n);
-
     angle = radians * (180/pi); // Udregner fra radianer til grader
 
     if (vec[0] < 0) angle = angle * (-1); // Hvis vektoren peger bagud (eller "til venstre"), skal der være en negativ vinkel på
@@ -84,9 +83,9 @@ async function getCoords (number) {
     samaritX=Math.floor(randomDice());
     samaritY=Math.floor(randomDice());
     ctx.beginPath();
-    ctx.fillStyle="red";
+    ctx.fillStyle = "red";
     ctx.fillRect(deltagerX, deltagerY, 1, 1);
-    ctx.fillStyle="black";
+    ctx.fillStyle = "black";
     ctx.fillRect(samaritX, samaritY, 1, 1);
 
     document.addEventListener("keydown",keyPush);
@@ -97,9 +96,9 @@ function drawPosition(){
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.fillStyle="red";
+    ctx.fillStyle = "red";
     ctx.fillRect(deltagerX, deltagerY, 1, 1);
-    ctx.fillStyle="black";
+    ctx.fillStyle = "black";
     ctx.fillRect(samaritX, samaritY, 1, 1);
     let angleForVector = calculateVector(deltagerX,deltagerY,samaritX,samaritY);
     let arrow = document.getElementById("arrow");
@@ -110,12 +109,12 @@ function drawPosition(){
     distanceHTML.innerHTML = Math.floor(distance);
     
     if(distance <= 5) {
-        clearInterval(t);  // Når at samaritten er 5 meter eller mindre fra rapportøren, opdateres drawPosition funktionen ikke længere 
+        clearInterval(t);  // Når at samaritten er 5 meter eller mindre fra rapportøren, opdateres drawPosition funktionen ikke længere og man får beskeden "du er der".
         alert("Du er der");
     }
 }
 
-function keyPush(evt) {
+function keyPush(evt) {      // Værdierne fra samaritX og samaritY ændres ved piletasterne. Tryk til venstre gør samaritX mindre, hvor at værdien forøges ved tryk til højre. Samme princip med samaritY for op og ned.
     switch(evt.keyCode) {
         case 37: //venstre
             samaritX-=1;
