@@ -61,7 +61,7 @@ app.get('/admin', checkAuthenticated, (req,res) =>{
 app.get('/direction/:id', checkAuthenticated, (req,res) =>{ 
     res.render('direction', { name: req.user.name, something: req.params.id});
 })
-app.get('/samarit', (req,res) =>{
+app.get('/samarit', (req,res) =>{ // Mangler der ikke en checkauthenticate her?
     res.render('samarit', { name: req.user.name });
 })
 app.get('/javascript/deltager.js', (req,res) =>{
@@ -109,7 +109,20 @@ app.post('/samaritlogin',checkNotAuthenticated, passport.authenticate('local', {
     failureRedirect: '/samaritlogin',
     failureFlash: true
 }))
-
+/*
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+  
+    res.redirect('/samaritlogin')
+}
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return res.redirect('/admin')
+    }
+    next()
+}  */
 app.post('/register', async (req,res)=>{
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -128,7 +141,7 @@ app.post('/register', async (req,res)=>{
     }
 })
 
-app.delete('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
     req.logOut()
     res.redirect('/account')
 })
@@ -192,13 +205,13 @@ app.post('/coords', (req, res) => {
                     let info = JSON.parse(chunk); // laver JSONstring om til noget vi kan læse og gemmer i info
                     objectCases[x] = new personCase(info,x); //constructor funktion, som laver et objekt med den info som er modtaget fra deltager.js
                     let caseToSend = JSON.stringify(objectCases);
-                    console.log(objectCases)
                     fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
                         if (error) throw error; 
                     })
                     x++;
                 })
 })
+                    
 
 app.post("/moreinfo", (req,res) =>{
     res.writeHead(200, {"Content-type":"text/plain"}); // Serveren siger ok, og tak for data, til clienten

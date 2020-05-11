@@ -50,6 +50,7 @@ function randomDice(){  //Random nummer generator funktion - giver et tal mellem
 
 const tabelAPI = "http://127.0.0.1:3160/updateTabel";
 
+/* getdata() bliver ikke brugt, men gemt for versionscontrol */
 async function getdata(number) {
     let element = await fetch(tabelAPI);
     let data = await element.json();
@@ -62,17 +63,25 @@ async function getdata(number) {
 
 // initialize config variables here
 let canvas, ctx;
-
 let deltagerX;
 let deltagerY;
 let samaritX;
 let samaritY;
 let globalCoords;
 let caseNumber;
+let t;
 
-// setup config variables and start the program
-async function getCoords (number) {
-    // set our config variables
+/* ===== startMovement() =====
+   Bliver kørt i onLoad()
+   Fetcher cases.json 
+   Finder canvas fra .ejs og definerer det til at være 2d
+   Definerer x- og y-koords fra det givne casenr fra cases.json
+   ctx.beginPath() begynder en ny path
+   ctx.fillStyle og fillRect laver punkter til hhv. samarit og deltager
+   eventListener venter på at man trykker på en knap
+   t kører drawPosition() 10 gange i sekundet 
+*/
+async function startMovement (number) {
     caseNumber = number;
     let apiDATA = await fetch(tabelAPI);
     globalCoords = await apiDATA.json();
@@ -80,8 +89,8 @@ async function getCoords (number) {
     ctx = canvas.getContext('2d');
     deltagerX = globalCoords[caseNumber].coordX;
     deltagerY = 99-globalCoords[caseNumber].coordY;
-    samaritX=Math.floor(randomDice());
-    samaritY=Math.floor(randomDice());
+    samaritX = Math.floor(randomDice());
+    samaritY = Math.floor(randomDice());
     ctx.beginPath();
     ctx.fillStyle = "red";
     ctx.fillRect(deltagerX, deltagerY, 1, 1);
@@ -91,26 +100,32 @@ async function getCoords (number) {
     document.addEventListener("keydown",keyPush);
     t = setInterval(drawPosition,1000/10);    //Opdaterer funktionen drawPosition 10 gange i sekundet
 }
-let t;
+
+/* ===== drawPosition() =====
+   Canvas elementet defineres fra HTML/ejs siden
+   ctx opdaterer pathen for hver gennemkørsel af funktionen
+   variablen "vector" modtager returobjektet fra calculateVector()
+   pilen bliver roteret med værdien vector.angle
+   afstanden bliver opdateret med værdien vector.distance
+   hvis afstanden er 5 eller mindre, opdateres drawPosition funktionen ikke længere og man får beskeden "Du er ankommet til din patient"
+*/
 function drawPosition(){
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.fillStyle = "red";
-    ctx.fillRect(deltagerX, deltagerY, 1, 1);
     ctx.fillStyle = "black";
     ctx.fillRect(samaritX, samaritY, 1, 1);
-    let angleForVector = calculateVector(deltagerX,deltagerY,samaritX,samaritY);
+    let vector = calculateVector(deltagerX,deltagerY,samaritX,samaritY);
     let arrow = document.getElementById("arrow");
-    arrow.style.transform = `rotate(${angleForVector.angle+180}deg)`    //Ændrer style attributen transform i samarit.html
+    arrow.style.transform = `rotate(${vector.angle+180}deg)`    //Ændrer style attributen transform i direction.ejs
     console.log(calculateVector(deltagerX, deltagerY, samaritX, samaritY));
-    let distance = distanceBetweenPoints(deltagerX, deltagerY, samaritX, samaritY);
+    let dist = vector.distance;
     let distanceHTML = document.getElementById("distanceHTML");
-    distanceHTML.innerHTML = Math.floor(distance);
+    distanceHTML.innerHTML = Math.floor(dist);
     
-    if(distance <= 5) {
-        clearInterval(t);  // Når at samaritten er 5 meter eller mindre fra rapportøren, opdateres drawPosition funktionen ikke længere og man får beskeden "du er der".
-        alert("Du er der");
+    if(dist <= 5) {
+        clearInterval(t);  // Når at samaritten er 5 meter eller mindre fra rapportøren, opdateres drawPosition funktionen ikke længere og man får beskeden "Du er ankommet til din patient".
+        alert("Du er ankommet til din patient");
     }
 }
 
@@ -132,7 +147,11 @@ function keyPush(evt) {      // Værdierne fra samaritX og samaritY ændres ved 
 }
 
 const afslutAPI = "http://127.0.0.1:3160/finish"
-
+/* ===== afslutSag() =====
+   Konverterer caseNumber til JSON streng
+   fetcher afslutAPI
+   Poster til app.js at det givne caseNumber er afsluttet
+   Relocater til samarit.ejs */
 async function afslutSag() {
     let caseToFinish = JSON.stringify(caseNumber);
     await fetch(afslutAPI, {
@@ -144,7 +163,11 @@ async function afslutSag() {
 
 
 const cantCompleteAPI = "http://127.0.0.1:3160/goback"
-
+/* ===== cantComplete()=====
+   Konverterer caseNumber til JSON streng
+   fetcher cantCompleteAPI
+   Poster til app.js at det givne caseNumber ikke er afsluttet
+   Relocater til samarit.ejs */
 async function cantComplete() {
     let caseToFinish = JSON.stringify(caseNumber);
     await fetch(cantCompleteAPI, {

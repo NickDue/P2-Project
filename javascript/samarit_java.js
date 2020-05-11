@@ -30,7 +30,7 @@ function updateTabel(para,i,table){
         let cell6 = row.insertCell();
         let cell7 = row.insertCell();
         let cell8 = row.insertCell();
-        let username = para[i].number; // Tildeler et nummer til en bruger
+        let number = para[i].number; // Tildeler et nummer til en bruger
         cell1.innerHTML = para[i].number + 1;
         cell2.innerHTML = para[i].coordX;
         cell3.innerHTML = para[i].coordY;
@@ -39,7 +39,7 @@ function updateTabel(para,i,table){
         cell6.innerHTML = para[i].status.toString(); // Status for casen
         cell7.innerHTML = para[i].samarit;
         if(para[i].status.toLowerCase() == "ledig") {
-            cell8.innerHTML = '<button action="admin" type="submit" id=\''+username+'\' onClick="acceptButt(\''+username+'\')" > Accept </button>' ; // Giver en accept knap \''+XXX+'\' lader os sende en variabel i et funktionskald i HTML                        
+            cell8.innerHTML = '<button action="admin" type="submit" id=\''+number+'\' onClick="acceptButt(\''+number+'\')" > Accept </button>' ; // Giver en accept knap \''+XXX+'\' lader os sende en variabel i et funktionskald i HTML                        
         }
         
     }
