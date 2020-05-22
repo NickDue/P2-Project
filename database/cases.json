@@ -5,7 +5,7 @@
     "coordY": "35",
     "date": "6/5-2020, kl 14:12",
     "exInfo": "asdw",
-    "status": "Afsluttet",
+    "status": "Ledig",
     "samarit": "Ingen"
   },
   {
@@ -14,7 +14,7 @@
     "coordY": "12",
     "date": "6/5-2020, kl 14:12",
     "exInfo": "asdwgg",
-    "status": "Optaget",
+    "status": "Ledig",
     "samarit": "Ingen"
   },
   {
@@ -86,6 +86,60 @@
     "coordY": "27",
     "date": "6/5-2020, kl 14:17",
     "exInfo": "Høj Feber",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 10,
+    "coordX": "61",
+    "coordY": "55",
+    "date": "14/5-2020, kl 11:42",
+    "exInfo": "Ingen info",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 11,
+    "coordX": "24",
+    "coordY": "25",
+    "date": "14/5-2020, kl 11:43",
+    "exInfo": "Ingen info",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 12,
+    "coordX": "61",
+    "coordY": "59",
+    "date": "14/5-2020, kl 11:43",
+    "exInfo": "Ingen info",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 13,
+    "coordX": "27",
+    "coordY": "81",
+    "date": "14/5-2020, kl 11:43",
+    "exInfo": "Ingen info",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 14,
+    "coordX": "25",
+    "coordY": "1",
+    "date": "14/5-2020, kl 11:51",
+    "exInfo": "Ingen info",
+    "status": "Ledig",
+    "samarit": "Ingen"
+  },
+  {
+    "number": 15,
+    "coordX": "43",
+    "coordY": "90",
+    "date": "14/5-2020, kl 11:54",
+    "exInfo": "Ingen info",
     "status": "Ledig",
     "samarit": "Ingen"
   }

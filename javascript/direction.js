@@ -98,7 +98,7 @@ async function startMovement (number) {
     ctx.fillRect(samaritX, samaritY, 1, 1);
 
     document.addEventListener("keydown",keyPush);
-    t = setInterval(drawPosition,1000/10);    //Opdaterer funktionen drawPosition 10 gange i sekundet
+    t = setInterval(drawPosition,1000);    //Opdaterer funktionen drawPosition 10 gange i sekundet
 }
 
 /* ===== drawPosition() =====

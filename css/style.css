@@ -53,6 +53,19 @@ body {
 .active {
     background-color: #4CAF50;
 }
+#helpMe {
+background-color: #008CBA; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100px;
+  margin: 4px 2px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
+}
 
 /* Arrow */
 #arrow {

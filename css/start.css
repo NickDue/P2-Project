@@ -57,8 +57,8 @@ body {
 .headline {
     display: block;
     width: 100%;
-    background-color: yellow;
     text-align: center;
+    font-size: 50px;
 }
 
 .buttons {

@@ -109,20 +109,7 @@ app.post('/samaritlogin',checkNotAuthenticated, passport.authenticate('local', {
     failureRedirect: '/samaritlogin',
     failureFlash: true
 }))
-/*
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-  
-    res.redirect('/samaritlogin')
-}
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return res.redirect('/admin')
-    }
-    next()
-}  */
+
 app.post('/register', async (req,res)=>{
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -155,6 +142,10 @@ app.get('/accounts', (req, res) =>{
     res.writeHead(200, {"Content-type":"text/plain"});
     fs.createReadStream(__dirname + '/database/accounts.json').pipe(res)
 })
+
+app.get('*', (req,res)=>{
+    res.render('404');
+});
 
 app.post('/accept',(req,res)=> {
         req.on('data',function(chungus){
@@ -218,8 +209,8 @@ app.post("/moreinfo", (req,res) =>{
         req.on('data', function(chunk){
             let info = JSON.parse(chunk);
             for(e of objectCases) {
-                if(parseInt(e.coordX) === info[0] && parseInt(e.coordY) === info[1])
-                e.exInfo = info[2];
+                if(parseInt(e.coordX) === info[0] && parseInt(e.coordY) === info[1]) 
+                    e.exInfo = info[2];                
                 fs.writeFile(__dirname + '/database/cases.json', JSON.stringify(objectCases, null, 2), (error) => {
                     if (error) throw error; 
                 })
@@ -273,7 +264,7 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.exInfo = 'Ingen info';
     this.status = 'Ledig';
     this.samarit = 'Ingen';
-    console.log(this.coordX + "+" + this.coordY + "+" + this.number);
+    //console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 
 function checkAuthenticated(req, res, next) {
