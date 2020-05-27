@@ -3,7 +3,7 @@ const acceptAPI = "http://127.0.0.1:3160/accept";
 
 async function getCases() {
     let table = document.getElementById("samarittable");
-    table.innerHTML = '<tr>' + '<th>Case nr.</th>' + '<th>X-Koordinat</th>' + '<th>Y-Koordinat</th>' + '<th>Dato</th>' + '<th>Information</th>' + '<th>Status</th>' + '<th>Samarit</th>' + '<th>Accepter</th>' + '</tr>'
+    table.innerHTML = '<tr>' + '<th>Case nr.</th>' + '<th>X-Koordinat</th>' + '<th>Y-Koordinat</th>' + '<th>Dato</th>' + '<th>Information</th>' + '<th>Status</th>' +  '<th>Accepter</th>' + '</tr>'
     let element = await fetch(tabelAPI);
     let para = await element.json();
     for (let i = 0; i < para.length; i++) {
@@ -28,7 +28,7 @@ function updateTabel(para,i,table){
         let cell4 = row.insertCell();
         let cell5 = row.insertCell();
         let cell6 = row.insertCell();
-        let cell7 = row.insertCell();
+        //let cell7 = row.insertCell();
         let cell8 = row.insertCell();
         let number = para[i].number; // Tildeler et nummer til en bruger
         cell1.innerHTML = para[i].number + 1;
@@ -37,7 +37,7 @@ function updateTabel(para,i,table){
         cell4.innerHTML = para[i].date;
         cell5.innerHTML = para[i].exInfo;
         cell6.innerHTML = para[i].status.toString(); // Status for casen
-        cell7.innerHTML = para[i].samarit;
+        //cell7.innerHTML = para[i].samarit;
         if(para[i].status.toLowerCase() == "ledig") {
             cell8.innerHTML = '<button action="admin" type="submit" id=\''+number+'\' onClick="acceptButt(\''+number+'\')" > Accept </button>' ; // Giver en accept knap \''+XXX+'\' lader os sende en variabel i et funktionskald i HTML                        
         }

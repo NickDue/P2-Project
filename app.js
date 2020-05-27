@@ -56,7 +56,10 @@ app.get('/samaritlogin',checkNotAuthenticated, (req,res)=>{
     res.render('samaritlogin');
 });
 app.get('/admin', checkAuthenticated, (req,res) =>{  
-    res.render('admin', { name: req.user.name }) 
+    if(req.user.permissions === "admin")
+        res.render('admin', { name: req.user.name }) 
+    else
+        res.redirect('/samarit')
 })
 app.get('/direction/:id', checkAuthenticated, (req,res) =>{ 
     res.render('direction', { name: req.user.name, something: req.params.id});
@@ -263,7 +266,6 @@ function personCase(info, x) { //Vores constructer funktion der laver cases
     this.date   = currentDate();
     this.exInfo = 'Ingen info';
     this.status = 'Ledig';
-    this.samarit = 'Ingen';
     //console.log(this.coordX + "+" + this.coordY + "+" + this.number);
 }
 

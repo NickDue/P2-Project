@@ -4,7 +4,7 @@ function getHelp() {
 
     if (coordsX != null && coordsY != null) {
         document.getElementById("demo").innerHTML = 
-        "Dine koordinater er:" + coordsX + "X," + coordsY + "Y. Hjælp er på vej!";
+        "Dine koordinater er:" + coordsX + "X," + coordsY + "Y.";
         document.getElementById("info").style.display = "block";
         document.getElementById("helpMe").style.display = "none";
         sendCoords(coordsX, coordsY);

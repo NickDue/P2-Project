@@ -4,5 +4,17 @@
     "name": "admin",
     "password": "$2b$10$a9r4E/Q68hzOuE8ArQBlfenPPRI2OlxHADpEWs9ILXZFQTIYEopyW",
     "permissions": "admin"
+  },
+  {
+    "id": "1590563852278",
+    "name": "bo",
+    "password": "$2b$10$95x1u4oSTgod4uGvVNPNOuii1XRx0yeuXhH9xRQqhnUvsWPW.3ZtS",
+    "permissions": "samarit"
+  },
+  {
+    "id": "1590563862149",
+    "name": "bo",
+    "password": "$2b$10$D6natv5u4IDRlQ3hx4Dz7uv5e98gVht3/aWRuYRcJ8NIOKLYriOPe",
+    "permissions": "samarit"
   }
 ]

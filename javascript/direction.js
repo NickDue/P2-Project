@@ -22,7 +22,7 @@ function calculateVectorBetweenPoints(deltagerX,deltagerY,samaritX,samaritY){ //
 
 function calculateAngleVector(vec){ // Udregner vinklen mellem to vektorer - Vektoren givet i calculate vektor og en arbitrær vektor langs Y-aksen
     let x1 = 0;  // Arbitrær vektor langs y-aksen
-    let y1 = -1;  // Arbitrær vektor langs y-aksen
+    let y1 = 1;  // Arbitrær vektor langs y-aksen
     let pi = Math.PI;
     let x2 = vec[0];
     let y2 = vec[1];
@@ -31,7 +31,7 @@ function calculateAngleVector(vec){ // Udregner vinklen mellem to vektorer - Vek
     radians = Math.acos(n);
     angle = radians * (180/pi); // Udregner fra radianer til grader
 
-    if (vec[0] < 0) angle = angle * (-1); // Hvis vektoren peger bagud (eller "til venstre"), skal der være en negativ vinkel på
+    if (vec[0] > 0) angle = angle * (-1); // Hvis vektoren peger bagud (eller "til venstre"), skal der være en negativ vinkel på
     return angle;
 }
 
@@ -117,7 +117,7 @@ function drawPosition(){
     ctx.fillRect(samaritX, samaritY, 1, 1);
     let vector = calculateVector(deltagerX,deltagerY,samaritX,samaritY);
     let arrow = document.getElementById("arrow");
-    arrow.style.transform = `rotate(${vector.angle+180}deg)`    //Ændrer style attributen transform i direction.ejs
+    arrow.style.transform = `rotate(${vector.angle}deg)`    //Ændrer style attributen transform i direction.ejs
     console.log(calculateVector(deltagerX, deltagerY, samaritX, samaritY));
     let dist = vector.distance;
     let distanceHTML = document.getElementById("distanceHTML");
